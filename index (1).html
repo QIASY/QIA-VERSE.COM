@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dream Party Builder — Genshin Impact</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3ecdc;--p:#fffaf0;--ink:#2b2a3a;--mu:#6d6a7c;--ln:#dccfb0;--gold:#9a7424;--g:#2e9e66;--b:#3a86d8;--y:#c99a1e;--r:#d24a4a;
+--Pyro:#e0643a;--Hydro:#3d7be0;--Cryo:#4fb3d9;--Electro:#9b6bd6;--Anemo:#2fbf9f;--Dendro:#6aa84f;--Geo:#d4a72c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12182b;--p:#1c2440;--ink:#ece5d3;--mu:#9aa3bd;--ln:#2e3858;--gold:#d9b26b;--g:#3fc380;--b:#4a9be8;--y:#e6b83c;--r:#e25555}}
+:root[data-theme=dark]{--bg:#12182b;--p:#1c2440;--ink:#ece5d3;--mu:#9aa3bd;--ln:#2e3858;--gold:#d9b26b;--g:#3fc380;--b:#4a9be8;--y:#e6b83c;--r:#e25555}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:18px 14px 56px}
+h1,h2{font-family:Cinzel,Georgia,serif;color:var(--gold);letter-spacing:.04em;margin:0}
+h1{font-size:28px;text-align:center;margin-top:6px}h1:after{content:"✦ ✦ ✦";display:block;font-size:11px;letter-spacing:.6em;margin-top:6px}
+h2{font-size:17px;margin:30px 0 10px}.sub{color:var(--mu);text-align:center;margin:6px 0 18px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+.tabs button{flex:none;padding:8px 12px;border-radius:999px;border:1px solid var(--ln);background:var(--p);color:var(--ink);font:inherit;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--c);color:#fff;border-color:var(--c)}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--ln);border-radius:8px;padding:7px 8px;width:100%}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin-top:10px}
+.ch{text-align:left;padding:8px 10px;border-radius:12px;border:1px solid var(--ln);border-left:4px solid var(--c);background:var(--p);color:var(--ink);font:inherit;cursor:pointer}
+.ch b{display:block;font-weight:600}.ch small{color:var(--mu);font-size:12px}.ch[aria-pressed=true]{opacity:.45}
+.pc{background:var(--p);border:1px solid var(--ln);border-top:4px solid var(--c);border-radius:14px;padding:14px;margin-bottom:12px}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px}.hd b{font-family:Cinzel,serif;font-size:18px}.hd button{border:0;background:none;color:var(--r);font:inherit;cursor:pointer}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.wide{grid-column:1/-1}
+label{font-size:12px;color:var(--mu);display:block}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.note{font-size:13px;color:var(--mu);margin:0 0 10px}
+.rep{background:var(--p);border:1px solid var(--gold);border-radius:14px;padding:6px 16px 16px}
+.rep>ul{padding-left:18px}.rep>ul>li{margin:14px 0}
+.tag{display:inline-block;margin:3px 4px 3px 0;padding:3px 10px;border-radius:999px;font-size:13px;color:#fff;background:var(--c)}
+.tag.y{color:#1d1a10}
+.g{--c:var(--g)}.b{--c:var(--b)}.y{--c:var(--y)}.r{--c:var(--r)}
+.pie{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.pie svg{width:150px;height:150px}
+.big{font-family:Cinzel,serif;font-size:36px;color:var(--gold)}
+.fn{color:var(--mu);font-size:13px;margin-top:26px}
+/* Dream Party Builder upgrade layer */
+:root{--bg:#111729;--p:#1b2440;--ink:#f1eadb;--mu:#a8b1c8;--ln:#34405f;--gold:#e1bd70;--g:#43c88a;--b:#65aef2;--y:#efc75e;--r:#ef7777}
+body{background:radial-gradient(ellipse at top,#202d4b 0%,var(--bg) 55%);min-height:100vh}
+main{max-width:900px;padding:24px 16px 64px}
+h1{font-size:clamp(25px,5vw,38px);text-shadow:0 4px 24px #0005}
+h2{margin-top:28px;padding-bottom:8px;border-bottom:1px solid var(--ln)}
+.sub{max-width:650px;margin-left:auto;margin-right:auto}.tabs{scrollbar-width:thin}
+.tabs button,.tools button{transition:transform .15s ease,filter .15s ease,background .15s ease}
+.tabs button:hover,.tools button:hover,.ch:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.ch{min-height:64px;transition:opacity .15s ease,transform .15s ease}
+.ch:focus-visible,.tabs button:focus-visible,.tools button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.pc,.rep{box-shadow:0 8px 22px #0002}input,select{min-height:38px}input[type=number]{min-width:0}
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0 4px;padding:12px;background:var(--p);border:1px solid var(--ln);border-radius:14px}
+.tools button{border:1px solid var(--ln);border-radius:9px;background:var(--bg);color:var(--ink);padding:9px 12px;font:inherit;cursor:pointer}
+.tools button:first-child{background:var(--gold);border-color:var(--gold);color:#171729;font-weight:700}
+.tools .note{flex-basis:100%;margin:0}.rep{overflow-wrap:anywhere}.big{font-size:clamp(28px,7vw,36px)}
+@media(max-width:420px){main{padding-left:10px;padding-right:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ch{padding:8px;font-size:13px}.row{grid-template-columns:1fr 1fr}.pc{padding:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+</style></head><body><main>
+<h1>Dream Party Builder</h1>
+<p class="sub">Build your team, tune each character, and compare a transparent synergy estimate. Fan-made planning tool — not an in-game damage simulator.</p>
+
+<h2>1. Choose characters</h2>
+<div class="tabs" id="tabs"></div>
+<input type="search" id="q" placeholder="Search by name" aria-label="Search characters" style="margin-top:8px">
+<div class="grid" id="grid"></div>
+
+<h2>2. Your party <span id="cnt" style="font-size:13px;color:var(--mu)"></span></h2>
+<div id="party"></div>
+<label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink)"><input type="checkbox" id="hex" style="width:auto"> Party has 2+ Hexerei characters (approximate +8% bonus)</label>
+
+<section class="tools" aria-label="Build tools">
+  <button type="button" id="exportBuild">Export build</button>
+  <button type="button" id="importBuildBtn">Import build</button>
+  <button type="button" id="resetBuild">Reset party</button>
+  <input type="file" id="importBuildFile" accept="application/json,.json" hidden>
+  <p id="toolStatus" class="note" role="status" aria-live="polite">Export your current party to save it as a JSON file.</p>
+</section>
+<h2>3. Party report</h2>
+<div class="rep" id="rep"></div>
+<p class="fn">The output is a simplified relative estimate, not true DPS and not an in-game simulator. Scores are useful only for rough comparisons within this tool. Rotations are general templates, so check each character’s guide for exact timings. Roster and gear data are static and may contain incomplete or unverified patch-specific entries. Confirm character kits, weapons, artifacts and buffs against current in-game data. Roles are community-style judgments. The weapon list has about 210 weapons from 3★ to 5★, sorted by rarity; the artifact list is still partial. Fan-made tool, not affiliated with HoYoverse.</p>
+</main>
+<script>
+var RL={D:"Main DPS",S:"Sub DPS",B:"Buffer",H:"Healer",W:"Shielder",R:"RES shred"},WT={S:"Sword",C:"Claymore",P:"Polearm",B:"Bow",T:"Catalyst"};
+var EL={
+Pyro:"Amber:B:S,Bennett:S:BH,Diluc:C:D,Klee:T:D,Xiangling:P:S,Yanfei:T:D,Yoimiya:B:D,Thoma:P:WS,Dehya:C:DW,Lyney:B:D,Gaming:C:D,Chevreuse:P:BHR,Mavuika:C:DB,Xinyan:C:W,Arlecchino:P:D,Hu Tao:P:D,Nicole:T:BH,Durin:S:DS,Pyro Traveler:S:S",
+Hydro:"Barbara:T:H,Xingqiu:S:S,Mona:T:BS,Tartaglia:B:D,Kokomi:T:H,Kamisato Ayato:S:D,Yelan:B:S,Nilou:S:S,Candace:P:W,Neuvillette:T:D,Furina:S:BS,Sigewinne:B:H,Mualani:T:D,Aino:C:BS,Columbina:T:BS,Vodyanitsa:T:HB,Dahlia:S:WB,Hydro Traveler:S:S",
+Cryo:"Kaeya:S:S,Diona:B:HW,Chongyun:C:S,Qiqi:S:H,Ganyu:B:D,Eula:C:D,Rosaria:P:S,Shenhe:P:B,Layla:S:W,Mika:P:H,Freminet:C:D,Charlotte:T:H,Wriothesley:T:D,Aloy:B:S,Citlali:T:BW,Skirk:S:D,Sandrone:C:D,Odette:S:BS,Escoffier:P:BH,Kamisato Ayaka:S:D,Cryo Traveler:S:DS,Lohen:P:D",
+Electro:"Fischl:B:S,Razor:C:D,Lisa:T:S,Beidou:C:SW,Keqing:S:D,Raiden Shogun:P:DB,Kujou Sara:B:B,Yae Miko:T:S,Kuki Shinobu:S:H,Dori:C:H,Cyno:P:D,Clorinde:S:D,Sethos:B:D,Ororon:B:S,Varesa:T:D,Iansan:P:B,Flins:P:D,Ineffa:P:SW,Alyosha:P:B,Electro Traveler:S:S",
+Anemo:"Jean:S:H,Venti:B:RB,Xiao:P:D,Sucrose:T:RB,Kaedehara Kazuha:S:BR,Sayu:C:H,Shikanoin Heizou:T:D,Wanderer:T:D,Faruzan:B:BR,Lynette:S:BS,Xianyun:T:BH,Chasca:B:D,Mizuki:T:DH,Varka:C:D,Vesna:S:D,Prune:T:B,Jahoda:B:H,Ifa:T:DH,Lan Yan:T:S,Anemo Traveler:S:D",
+Dendro:"Collei:B:S,Tighnari:B:D,Nahida:T:SB,Baizhu:T:H,Kaveh:C:S,Alhaitham:S:D,Yaoyao:P:H,Kirara:S:W,Emilie:P:S,Kinich:C:D,Lauma:T:BR,Nefer:T:D,Dendro Traveler:S:S",
+Geo:"Ningguang:T:D,Noelle:C:WH,Albedo:S:S,Zhongli:P:WR,Arataki Itto:C:D,Gorou:B:B,Yun Jin:P:B,Chiori:S:D,Navia:C:D,Kachina:P:S,Xilonen:S:BR,Zibai:S:D,Illuga:P:B,Linnea:B:S,Geo Traveler:S:S"};
+var WS={S:"Mistsplitter Reforged:5,Primordial Jade Cutter:5,Haran Geppaku Futsu:5,Freedom-Sworn:5,Aquila Favonia:5,Splendor of Tranquil Waters:5,Light of Foliar Incision:5,Uraku Misugiri:5,Sacrificial Sword:4,The Flute:4,Iron Sting:4,Favonius Sword:4,Festering Desire:4,Cool Steel:3,Harbinger of Dawn:3,Skyrider Sword:3,Skyward Blade:5,Summit Shaper:5,Key of Khaj-Nisut:5,Absolution:5,Azurelight:5,Athame Artis:5,Beyond the Chrysalis:5,Peak Patrol Song:5,Lion’s Roar:4,Prototype Rancour:4,Blackcliff Longsword:4,Royal Longsword:4,Sword of Descension:4,Fillet Blade:4,Amenoma Kageuchi:4,Toukabou Shigure:4,Sapwood Blade:4,Xiphos’ Moonlight:4,Finale of the Deep:4,Wolf-Fang:4,The Dockhand’s Assistant:4,Sword of Narzissenkreuz:4,Cinnabar Spindle:4,The Alley Flash:4,Kagotsurube Isshin:4,Serenity’s Call:4,Moonweaver’s Dawn:4,Source of Kindling:4,Heretic’s Molten Blade:4,New Bough:4,Silver Light:4,Dark Iron Sword:3,Traveler’s Handy Sword:3",
+C:"Wolf’s Gravestone:5,Song of Broken Pines:5,Redhorn Stonethresher:5,Skyward Pride:5,The Unforged:5,Sacrificial Greatsword:4,Rainslasher:4,Favonius Greatsword:4,Serpent Spine:4,Ferrous Shadow:3,Debate Club:3,Bloodtainted Greatsword:3,Beacon of the Reed Sea:5,A Thousand Blazing Suns:5,A Teaspoon of Transcendence:5,Fang of the Mountain King:5,Gest of the Mighty Wolf:5,Akuoumaru:4,The Bell:4,Lithic Blade:4,Blackcliff Slasher:4,Royal Greatsword:4,Prototype Archaic:4,Katsuragikiri Nagamasa:4,Luxurious Sea-Lord:4,Snow-Tombed Starsilver:4,Makhaira Aquamarine:4,Forest Regalia:4,Tidal Shadow:4,Ultimate Overlord’s Mega Magic Sword:4,Mailed Flower:4,Portable Power Saw:4,Talking Stick:4,Fruitful Hook:4,Forged by the Golden Melody:4,Master Key:4,Blade of Redemption:4,Whiteblind:4,Skyrider Greatsword:3",
+P:"Staff of Homa:5,Engulfing Lightning:5,Vortex Vanquisher:5,Primordial Jade Winged-Spear:5,Calamity Queller:5,Staff of the Scarlet Sands:5,Dragon’s Bane:4,Favonius Lance:4,Deathmatch:4,Crescent Pike:4,White Tassel:3,Black Tassel:3,Skyward Spine:5,Lumidouce Elegy:5,Crimson Moon’s Semblance:5,Symphonist of Scents:5,Bloodsoaked Ruins:5,Blackcliff Pole:4,Royal Spear:4,Prototype Starglitter:4,Lithic Spear:4,Dragonspine Spear:4,Kitain Cross Spear:4,Wavebreaker’s Fin:4,Moonpiercer:4,Missive Windspear:4,Ballad of the Fjords:4,Rightful Reward:4,Prospector’s Drill:4,Mountain-Bracing Bolt:4,The Catch:4,Footprint of the Rainbow:4,Frostbreath:4,Ballad of the Sentinel:4,Halberd:3",
+B:"Elegy for the End:5,Polar Star:5,Thundering Pulse:5,Aqua Simulacra:5,Amos’ Bow:5,Skyward Harp:5,Hunter’s Path:5,The Stringless:4,Rust:4,Sacrificial Bow:4,Favonius Warbow:4,Alley Hunter:4,Slingshot:3,Raven Bow:3,Silvershower Heartstrings:5,The First Great Magic:5,Astral Vulture’s Crimson Plumage:5,Windblume Ode:4,Compound Bow:4,Hamayumi:4,Prototype Crescent:4,Predator:4,Royal Bow:4,Blackcliff Warbow:4,King’s Squire:4,Mitternachts Waltz:4,End of the Line:4,Range Gauge:4,Chain Breaker:4,Cloudforged:4,The Viridescent Hunt:4,Fading Twilight:4,Ibis Piercer:4,Scion of the Blazing Sun:4,Mouun’s Moon:4,Flower-Wreathed Feathers:4,Jade Vista:4,Frostsnow Oath:4,Breezeborne Refrain:4,Recurve Bow:3,Sharpshooter’s Oath:3,Ebony Bow:3",
+T:"Kagura’s Verity:5,A Thousand Floating Dreams:5,Lost Prayer to the Sacred Winds:5,Skyward Atlas:5,Jadefall’s Splendor:5,Tulaytullah’s Remembrance:5,Cashflow Supervision:5,Sacrificial Fragments:4,The Widsith:4,Favonius Codex:4,Dodoco Tales:4,Solar Pearl:4,Magic Guide:3,Emerald Orb:3,Thrilling Tales of Dragon Slayers:3,Tome of the Eternal Flow:5,Crane’s Echoing Call:5,Everlasting Moonglow:5,Memory of Dust:5,Surf’s Up:5,Vivid Notions:5,Starcaller’s Watch:5,Sunny Morning Sleep-In:5,Nightweaver’s Looking Glass:5,Hymn of the Maelstrom:5,Angelos’ Heptades:5,Eye of Perception:4,Wine and Song:4,Blackcliff Agate:4,Royal Grimoire:4,Prototype Amber:4,Mappa Mare:4,Frostbearer:4,Fruit of Fulfillment:4,Hakushin Ring:4,Oathsworn Eye:4,Flowing Purity:4,Ballad of the Boundless Blue:4,Wandering Evenstar:4,Ash-Graven Drinking Horn:4,Tamayuratei no Ohanashi:4,Etherlight Spindlelute:4,Blackmarrow Lantern:4,Echoes of a Resolute Heart:4,Clash of Kings:4,Winter’s Heavy Heart:4,Twin Nephrite:3,Otherworldly Story:3"};
+var BW={"Staff of Homa":"Hu Tao","Engulfing Lightning":"Raiden Shogun","Primordial Jade Winged-Spear":"Cyno,Xiao","Calamity Queller":"Xiao,Arlecchino","Kagura’s Verity":"Yae Miko,Nahida","A Thousand Floating Dreams":"Nahida,Kaveh","Aqua Simulacra":"Yelan,Tartaglia","Polar Star":"Ganyu,Yoimiya","Elegy for the End":"Venti,Faruzan","Splendor of Tranquil Waters":"Furina,Kamisato Ayato","Freedom-Sworn":"Kaedehara Kazuha,Lynette","Mistsplitter Reforged":"Kamisato Ayaka,Keqing","Haran Geppaku Futsu":"Kamisato Ayato,Alhaitham","Skyward Atlas":"Klee,Yanfei","Tulaytullah’s Remembrance":"Wanderer,Neuvillette","Vortex Vanquisher":"Zhongli,Yun Jin","Favonius Sword":"Bennett,Jean","Favonius Codex":"Sucrose,Kokomi","Sacrificial Fragments":"Mona,Sucrose"};
+var AS=["Gladiator’s Finale~+35% Normal ATK DMG with sword/claymore/polearm~Clorinde,Razor,Arataki Itto,Beidou~","Wanderer’s Troupe~+35% Charged ATK DMG for catalyst/bow~Ganyu,Neuvillette,Klee,Yanfei,Ningguang,Tighnari~","Viridescent Venerer~Swirl DMG up and shreds enemy elemental RES~Venti,Kaedehara Kazuha,Sucrose,Faruzan,Xianyun,Mizuki,Jean,Vesna~","Noblesse Oblige~Burst DMG up and team ATK +20%~Bennett,Layla,Mona,Raiden Shogun~","Emblem of Severed Fate~ER converts to Burst DMG~Raiden Shogun,Xingqiu,Yelan,Xiangling,Kujou Sara~","Crimson Witch of Flames~Pyro DMG and Vaporize/Melt/Burning bonus~Hu Tao,Klee,Yanfei,Diluc,Yoimiya,Lyney,Mavuika~Pyro","Shimenawa’s Reminiscence~Normal/Charged/Plunge DMG up, uses energy~Gaming,Diluc,Yoimiya~","Blizzard Strayer~Cryo DMG and CRIT vs frozen/Cryo foes~Ganyu,Kamisato Ayaka,Skirk,Rosaria,Lohen~Cryo","Heart of Depth~Hydro DMG, Normal/Charged DMG after skill~Kamisato Ayato,Tartaglia,Mualani~Hydro","Thundering Fury~Electro DMG, Skill cooldown cut on reactions~Fischl,Keqing,Yae Miko,Lisa,Beidou~Electro","Thundersoother~+35% DMG vs Electro-affected enemies~Keqing,Razor~Electro","Retracting Bolide~Shield strength and Normal/Charged DMG~Zhongli,Noelle,Dehya,Layla,Diona~","Maiden Beloved~Healing effectiveness and heal boosts~Kokomi,Barbara,Jean,Qiqi,Mika,Sigewinne,Charlotte,Vodyanitsa,Jahoda~","Tenacity of the Millelith~Shield strength, team ATK up on hit~Zhongli,Layla,Thoma,Candace,Xinyan~","Pale Flame~Physical DMG stacking~Eula,Razor,Xianyun~","Archaic Petra~Geo DMG, team elemental DMG after crystallize~Albedo,Zhongli,Chiori,Arataki Itto,Ningguang,Navia,Zibai~Geo","Husk of Opulent Dreams~DEF scaling and Geo DMG~Albedo,Arataki Itto,Noelle,Xilonen~Geo","Gilded Dreams~EM and ATK for Dendro reactions~Nahida,Alhaitham,Tighnari,Collei,Kirara~","Deepwood Memories~Skills/bursts shred Dendro RES~Nahida,Baizhu,Collei,Yaoyao,Lauma,Emilie~Dendro","Flower of Paradise Lost~Bloom-family reaction DMG up~Nilou,Nahida,Kaveh,Collei~","Desert Pavilion Chronicle~Normal/Charged/Plunge DMG after Anemo hit~Wanderer,Shikanoin Heizou~","Ocean-Hued Clam~Healing converts into AoE damage~Kokomi,Sigewinne,Baizhu,Mika,Yaoyao,Vodyanitsa~","Vourukasha’s Glow~Max HP and Skill/Burst DMG~Nilou,Yelan,Sigewinne,Furina~","Marechaussee Hunter~Normal/Charged DMG and CRIT from HP changes~Wriothesley,Hu Tao~","Golden Troupe~Elemental Skill DMG up, bonus off-field~Furina,Clorinde,Lyney,Navia,Chiori~","Vermillion Hereafter~Burst grants ATK, scales with HP loss~Mavuika,Kinich,Chasca~","Obsidian Codex~Nightsoul DMG and CRIT~Mavuika,Kinich,Chasca,Mualani~","Scroll of the Hero of Cinder City~Reaction team buffs and Nightsoul~Citlali,Chasca,Xilonen~","Unfinished Reverie~Burning-related DMG boost~Arlecchino,Gaming,Dehya~Pyro","Long Night’s Oath~Plunging attack DMG boost~Gaming,Xiao,Kaedehara Kazuha~","Finale of the Deep Galleries~Cryo-focused Normal/Burst DMG~Skirk,Kamisato Ayaka,Rosaria~Cryo","Silken Moon’s Serenade~Lunar reaction support (7.x, approximate)~Columbina,Flins,Ineffa,Zibai,Nefer,Lauma,Illuga~"].map(function(s){var p=s.split("~");return{n:p[0],f:p[1],k:p[2].split(","),e:p[3]}});
+Object.assign(BW,{"Hymn of the Maelstrom":"Vodyanitsa,Sangonomiya Kokomi","Beyond the Chrysalis":"Vesna","Winter’s Heavy Heart":"Yae Miko,Wriothesley","A Teaspoon of Transcendence":"Sandrone","A Thousand Blazing Suns":"Mavuika,Kinich","Crimson Moon’s Semblance":"Arlecchino","Gest of the Mighty Wolf":"Varka","Bloodsoaked Ruins":"Flins","Silvershower Heartstrings":"Sigewinne","The First Great Magic":"Lyney","Peak Patrol Song":"Xilonen","Azurelight":"Skirk","Absolution":"Clorinde","Symphonist of Scents":"Emilie","Angelos’ Heptades":"Nicole","Athame Artis":"Durin"});var CH=[],WP={},LUN="Flins,Ineffa,Zibai,Columbina,Illuga,Lauma,Nefer,Aino,Linnea,Mona,Nahida".split(","),ENB=["Odette","Sandrone","Cryo Traveler"];
+Object.keys(EL).forEach(function(e){EL[e].split(",").forEach(function(x){var p=x.split(":");CH.push({n:p[0],e:e,w:p[1],r:p[2]})})});
+Object.keys(WS).forEach(function(t){WP[t]=WS[t].split(",").map(function(x){var p=x.split(":");return{n:p[0],s:+p[1]}}).sort(function(a,b){return b.s-a.s||a.n.localeCompare(b.n)})});
+var RX={"Pyro+Hydro":["Vaporize",.95],"Cryo+Pyro":["Melt",.95],"Electro+Pyro":["Overloaded",.55],"Dendro+Pyro":["Burning",.7],"Anemo+Pyro":["Swirl",.7],"Geo+Pyro":["Crystallize",.5],"Cryo+Hydro":["Freeze",.75],"Electro+Hydro":["Electro-Charged",.75],"Dendro+Hydro":["Bloom",.75],"Anemo+Hydro":["Swirl",.7],"Geo+Hydro":["Crystallize",.5],"Cryo+Electro":["Superconduct",.5],"Cryo+Dendro":["No reaction",.45],"Anemo+Cryo":["Cryo Swirl",.7],"Cryo+Geo":["Crystallize",.5],"Dendro+Electro":["Aggravate",.8],"Anemo+Electro":["Swirl",.7],"Electro+Geo":["Crystallize",.5],"Anemo+Dendro":["Swirl",.6],"Dendro+Geo":["No reaction",.45],"Anemo+Geo":["Swirl",.45]};
+var RES={Pyro:["+25% ATK",1.12],Hydro:["+25% max HP",1.04],Cryo:["+15% CRIT Rate vs Cryo-affected",1.07],Electro:["Energy on reactions",1.03],Geo:["+15% DMG, −20% Geo RES",1.15],Anemo:["Less stamina use",1],Dendro:["+EM boost",1.05]};
+var SF=[["lv","Level"],["atk","ATK"],["hp","Max HP"],["def","DEF"],["em","Elem. Mastery"],["cr","CRIT Rate %"],["cd","CRIT DMG %"],["er","Energy Rech. %"],["dmg","Elem. DMG %"]];
+var P=[],tab="Cryo",$=function(i){return document.getElementById(i)},V=function(e){return"var(--"+e+")"},has=function(m,r){return m.c.r.indexOf(r)>=0};
+function roles(c){return"("+c.r.split("").map(function(x){return RL[x]}).join(" · ")+")"}
+function grid(){var f=$("q").value.toLowerCase();$("grid").innerHTML=CH.filter(function(c){return f?c.n.toLowerCase().indexOf(f)>=0:c.e===tab}).map(function(c){return'<button class="ch" style="--c:'+V(c.e)+'" data-n="'+c.n+'" aria-pressed="'+P.some(function(m){return m.c.n===c.n})+'"><b>'+c.n+'</b><small>'+roles(c)+'</small></button>'}).join("")}
+function tabs(){$("tabs").innerHTML=Object.keys(EL).map(function(e){return'<button style="--c:'+V(e)+'" data-e="'+e+'" aria-pressed="'+(e===tab)+'">'+e+' '+EL[e].split(",").length+'</button>'}).join("")}
+function opts(a,sel){return a.map(function(x,i){return'<option value="'+i+'"'+(i===sel?" selected":"")+'>'+x+'</option>'}).join("")}
+function note(m){var a=AS[m.a];return"<b>"+a.n+"</b>: "+a.f+".<br>Suitable for: "+a.k.join(", ")}
+function party(){$("cnt").textContent="("+P.length+"/4)";$("party").innerHTML=P.length?P.map(function(m,i){var ws=WP[m.c.w],wi=ws.indexOf(m.w);
+return'<div class="pc" data-i="'+i+'" style="--c:'+V(m.c.e)+'"><div class="hd"><b>'+m.c.n+'</b><button data-x="'+i+'">Remove</button></div><div style="color:var(--mu);font-size:13px">'+m.c.e+" · "+WT[m.c.w]+" · "+roles(m.c)+'</div><div class="row">'+
+'<label>Constellation<select data-k="con">'+opts([0,1,2,3,4,5,6].map(function(x){return"C"+x}),m.con)+'</select></label>'+
+'<label>Weapon<select data-k="w">'+opts(ws.map(function(w){return w.s+"★ "+w.n}),wi)+'</select></label>'+
+'<label>Refinement<select data-k="ref">'+opts([1,2,3,4,5].map(function(x){return"R"+x}),m.ref-1)+'</select></label>'+
+'<label>Weapon level<select data-k="wl">'+[1,20,40,50,60,70,80,90].map(function(l){return'<option'+(l===m.wl?" selected":"")+'>'+l+'</option>'}).join("")+'</select></label>'+
+'<label class="wide">Artifact set (full 5 pieces)<select data-k="a">'+opts(AS.map(function(a){return a.n}),m.a)+'</select></label></div><p class="note">'+note(m)+'</p><div class="st">'+
+SF.map(function(f){return'<label>'+f[1]+'<input type="number" data-k="'+f[0]+'" value="'+m.s[f[0]]+'"></label>'}).join("")+'</div></div>'}).join(""):'<p class="sub" style="text-align:left">No characters yet. Tap a name above to add one.</p>'}
+function add(n){if(P.length>=4||P.some(function(m){return m.c.n===n}))return;var c=CH.filter(function(x){return x.n===n})[0],ws=WP[c.w],a=0;AS.forEach(function(s,i){if(!a&&s.k.indexOf(n)>=0)a=i});
+P.push({c:c,con:0,w:ws.filter(function(w){return w.s===4})[0]||ws[0],ref:1,wl:90,a:a,s:{lv:90,atk:c.r.indexOf("D")>=0?2200:1500,hp:20000,def:800,em:100,cr:60,cd:120,er:120,dmg:30}});all()}
+function all(){grid();party();analyze()}
+function rt(v){return v>=.9?"g":v>=.7?"b":v>=.45?"y":"r"}
+var LB={g:"Excellent",b:"Good",y:"Okay",r:"Unsuitable"};
+function tg(v,t){var k=rt(v);return'<span class="tag '+k+'" title="'+LB[k]+'">'+t+" · "+LB[k]+"</span>"}
+function arR(m){var a=AS[m.a];return a.k.indexOf(m.c.n)>=0?1:a.e&&a.e!==m.c.e?.2:a.e===m.c.e?.75:.5}
+function wpR(m){var b=BW[m.w.n];if(b&&b.split(",").indexOf(m.c.n)>=0)return 1;var v=m.w.s===5?.78:m.w.s===4?(m.ref>=3?.72:.6):.35;return m.wl<70?v-.2:v}
+function analyze(){var R=$("rep");if(P.length<2){R.innerHTML='<p class="sub" style="text-align:left">Pick at least two characters to see synergies, damage, and a rotation.</p>';return}
+var en=P.some(function(m){return ENB.indexOf(m.c.n)>=0}),els={},sc=[],h="";P.forEach(function(m){els[m.c.e]=(els[m.c.e]||0)+1});
+var D=P.filter(function(m){return has(m,"D")||has(m,"S")}),nB=P.filter(function(m){return has(m,"B")||has(m,"R")}).length;
+var own=P.map(function(m){var s=m.s,rm=has(m,"D")?30:has(m,"S")?12:3,cr=1+Math.min(s.cr,100)/100*s.cd/100,cm=1+m.con*(rm>=12?.05:.02),wm=(1+(m.w.s-3)*.03+(m.ref-1)*.01)*(.6+.4*m.wl/90),am=.9+.2*arR(m),er=s.er>=120?1:s.er>=100?.97:.9,em=1+.5*2.78*s.em/(s.em+1400);
+return s.atk*(1+s.dmg/100)*cr*rm*cm*wm*am*er*em*(.92+.16*wpR(m))});
+var pairs="",pv=[];for(var i=0;i<P.length;i++)for(var j=i+1;j<P.length;j++){var a=P[i],b=P[j],x,v;
+if(a.c.e===b.c.e){x="Resonance pair";v=["Pyro","Cryo","Hydro","Geo"].indexOf(a.c.e)>=0?.8:.7}else{var k=a.c.e+"+"+b.c.e,r=RX[k]||RX[b.c.e+"+"+a.c.e]||["No direct reaction",.35];x=r[0];v=r[1];if((k==="Cryo+Electro"||k==="Electro+Cryo")&&en){x="Stellar-Conduct";v=.95}if((k==="Anemo+Cryo"||k==="Cryo+Anemo")&&en){x="Stellar-Swirl";v=.95}}
+var ad=(has(a,"B")||has(a,"R"))&&(has(b,"D")||has(b,"S"))||(has(b,"B")||has(b,"R"))&&(has(a,"D")||has(a,"S"));v+=ad?.1:0;if(has(a,"D")&&has(b,"D"))v-=.15;v=Math.max(0,Math.min(1,v));pv.push(v);pairs+=tg(v,a.c.n+" + "+b.c.n+": "+x)}
+var gm="",Tr=1,g=[];Object.keys(els).forEach(function(e){if(els[e]>=2){Tr*=RES[e][1];g.push(tg(.8,e+" resonance: "+RES[e][0]))}});
+var top=pv.slice().sort(function(a,b){return b-a}).slice(0,3),ra=top.reduce(function(a,b){return a+b},0)/top.length;Tr*=1+.3*ra;
+if(en&&els.Cryo&&(els.Electro||els.Anemo)){Tr*=1.12;g.push(tg(.95,"Stellar Glimmer active: Odette/Sandrone/Cryo Traveler enables it"))}
+if(P.filter(function(m){return LUN.indexOf(m.c.n)>=0}).length>=2){Tr*=1.1;g.push(tg(.85,"Lunar reaction support from 2+ Lunar characters"))}
+if($("hex").checked){Tr*=1.08;g.push(tg(.8,"Hexerei party bonus (manual toggle)"))}
+if(!g.length)g.push(tg(.5,"No special gimmick active"));
+var Tb=1+.1*nB,sD=0;P.forEach(function(m,i){if(D.indexOf(m)>=0)sD+=own[i]});var sS=own.reduce(function(a,b){return a+b},0)-sD,fin=sD*Tb*Tr+sS;
+var sl=P.map(function(m,i){var v=own[i];if(D.indexOf(m)>=0)v+=0;return v});
+if(nB)P.forEach(function(m,i){if(has(m,"B")||has(m,"R"))sl[i]+=sD*(Tb-1)*Tr/nB});P.forEach(function(m,i){sl[i]+=sD*(Tr-1)/P.length});
+var art="",wp="",as=[];P.forEach(function(m){var a=arR(m),w=wpR(m);as.push(a,w);art+=tg(a,m.c.n+": "+AS[m.a].n);wp+=tg(w,m.c.n+": "+m.w.n+" R"+m.ref)});
+var syn=(pv.concat(as).reduce(function(a,b){return a+b},0))/(pv.length+as.length),hasD=P.some(function(m){return has(m,"D")}),sc10=10*(.6*syn+.4*Math.min(1,fin/300000));if(!hasD)sc10=Math.min(sc10,4.5);sc10=Math.round(sc10*10)/10;
+var pri=function(m){return has(m,"D")?4:has(m,"S")?3:has(m,"R")?0:has(m,"B")?1:2},ord=P.slice().sort(function(a,b){return pri(a)-pri(b)}),ph=["Skill, then Burst: apply RES shred or debuffs first","Skill, then Burst: open the buff window","Skill for shield or heal; Burst only if energy allows","Skill, then Burst: apply the element and trigger the reaction","Burst, Skill, then your attack string while every buff is up; swap out before buffs expire"];
+var rot=ord.map(function(m){return"<li><b>"+m.c.n+"</b>: "+ph[pri(m)]+"</li>"}).join("");
+var tot=sl.reduce(function(a,b){return a+b},0),pc=P.map(function(m,i){return{c:V(m.c.e),n:m.c.n,v:sl[i]}});
+function pie(){var a0=-Math.PI/2,o="";pc.forEach(function(s){var a1=a0+s.v/tot*2*Math.PI,l=a1-a0>Math.PI?1:0;o+=s.v/tot>.999?'<circle cx="50" cy="50" r="45" style="fill:'+s.c+'"/>':'<path d="M50 50L'+(50+45*Math.cos(a0))+" "+(50+45*Math.sin(a0))+"A45 45 0 "+l+" 1 "+(50+45*Math.cos(a1))+" "+(50+45*Math.sin(a1))+'Z" style="fill:'+s.c+';stroke:var(--p)"/>';a0=a1});return o}
+var lg=pc.map(function(s){return'<div><span class="tag" style="--c:'+s.c+'">'+Math.round(s.v/tot*100)+"%</span> "+s.n+"</div>"}).join("");
+var f=function(n){return Math.round(n).toLocaleString()};
+R.innerHTML='<ul><li><b>Estimated relative output</b><div class="big">'+f(fin)+'</div><span style="color:var(--mu);font-size:13px">Model range (±15%): '+f(fin*.85)+" to "+f(fin*1.15)+"</span></li>"+
+"<li><b>Artifact synergies</b><br>"+art+"<br><b>Weapon synergies</b><br>"+wp+"</li>"+
+"<li><b>Character synergies and gimmicks</b><br>"+pairs+"<br>"+g.join("")+"</li>"+
+"<li><b>Recommended rotation</b> (general template)<ol style='padding-left:20px'>"+rot+"<li>Repeat as cooldowns return. Check each character’s guide for exact order and timing.</li></ol></li>"+
+'<li><b>Contribution per character</b><div class="pie"><svg viewBox="0 0 100 100" role="img" aria-label="Damage contribution pie chart">'+pie()+"</svg><div>"+lg+"</div></div></li>"+
+"<li><b>All synergies combined</b><br>Base "+f(sD+sS)+" × buffer bonus "+Tb.toFixed(2)+" × reactions, resonance and gimmicks "+Tr.toFixed(2)+" (applied to damage dealers) = <b>"+f(fin)+" relative output units</b>. Constellations, weapon refinement, artifacts, EM, ER and CRIT are already inside each character’s base.</li>"+
+'<li><b>Overall rating</b><div class="big">'+sc10+" / 10</div></li></ul>"}
+function status(msg){$("toolStatus").textContent=msg}
+function exportBuild(){
+ var data={app:"Dream Party Builder",version:2,hex:$("hex").checked,party:P.map(function(m){return {name:m.c.n,weapon:m.w.n,refinement:m.ref,weaponLevel:m.wl,constellation:m.con,artifact:AS[m.a].n,stats:m.s}})};
+ var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="dream-party-build.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);status("Build exported as dream-party-build.json.");
+}
+function importBuildFile(file){if(!file)return;var reader=new FileReader();reader.onload=function(){try{
+ var data=JSON.parse(reader.result);if(!data||!Array.isArray(data.party)||data.party.length>4)throw new Error("File must contain up to four characters.");var next=[];
+ data.party.forEach(function(x){var c=CH.find(function(y){return y.n===x.name});if(!c)throw new Error("Character not found in this roster: "+x.name);
+ var ws=WP[c.w],w=ws.find(function(y){return y.n===x.weapon})||ws[0],ai=AS.findIndex(function(y){return y.n===x.artifact}),stats={};
+ SF.forEach(function(f){var v=Number(x.stats&&x.stats[f[0]]);stats[f[0]]=Number.isFinite(v)?Math.max(0,Math.min(1000000,v)):0});
+ next.push({c:c,con:Math.max(0,Math.min(6,Number(x.constellation)||0)),w:w,ref:Math.max(1,Math.min(5,Number(x.refinement)||1)),wl:[1,20,40,50,60,70,80,90].includes(Number(x.weaponLevel))?Number(x.weaponLevel):90,a:Math.max(0,ai),s:stats});});
+ P=next;$("hex").checked=!!data.hex;all();status("Build imported successfully.");
+ }catch(err){status("Could not import build: "+err.message)}};reader.onerror=function(){status("Could not read that file.")};reader.readAsText(file)}
+$("exportBuild").addEventListener("click",exportBuild);
+$("importBuildBtn").addEventListener("click",function(){$("importBuildFile").click()});
+$("importBuildFile").addEventListener("change",function(e){importBuildFile(e.target.files&&e.target.files[0]);e.target.value=""});
+$("resetBuild").addEventListener("click",function(){P=[];$("hex").checked=false;all();status("Party reset. Choose characters to start a new build.")});
+
+$("tabs").onclick=function(e){var b=e.target.closest("button");if(b){tab=b.dataset.e;$("q").value="";tabs();grid()}};
+$("grid").onclick=function(e){var b=e.target.closest("button");if(b)add(b.dataset.n)};
+$("q").oninput=grid;$("hex").onchange=analyze;
+$("party").onclick=function(e){var b=e.target.closest("[data-x]");if(b){P.splice(+b.dataset.x,1);all()}};
+function upd(e){var t=e.target,k=t.dataset.k,c=t.closest(".pc");if(!k||!c)return;var m=P[+c.dataset.i];
+if(k==="w")m.w=WP[m.c.w][+t.value];else if(k==="a")m.a=+t.value;else if(k==="con")m.con=+t.value;else if(k==="ref")m.ref=+t.value+1;else if(k==="wl")m.wl=+t.value;else m.s[k]=+t.value||0;
+if(k==="a")c.querySelector(".note").innerHTML=note(m);analyze()}
+$("party").onchange=upd;$("party").oninput=function(e){if(e.target.type==="number")upd(e)};
+tabs();add("Sandrone");add("Yae Miko");add("Odette");add("Escoffier");
+</script></body></html>
